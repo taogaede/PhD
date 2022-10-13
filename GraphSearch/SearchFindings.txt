@@ -1,0 +1,4 @@
+GRAPHS WHOSE DISTANCE MULTISETS ARE {1^L,2^L,...,(n-1)^L} FOR SOME L (like difference sets).
+
+-No trees on 8 vertices with dists 1,2,...,n-1 occuring with equal multiplicity.
+-No trees on 10 vertices with dists 1,2,...,n-1 occuring with equal multiplicity.  NOTE only edge weights from {1,2,3,4} were checked; perhaps there are solutions involving higher edge weights (CHECK).
