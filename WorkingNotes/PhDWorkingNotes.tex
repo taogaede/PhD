@@ -77,36 +77,10 @@
 \begin{document}
 	\maketitle
 	
-	\section{Trees}
+	\section{Crescent Labelled Trees}
 	
-	Let $T$ be a tree of order $n$.  A crescent labelling of $T$ is a map $L: E(T) \mapsto \{1,2, \ldots, t\}$, such that the distance multiset of $L(T)$ is of the form $\{d_1^1,d_2^2, \ldots, d_{n-1}^{n-1}\}$.  The diameter of $T$, denoted $\diam(T)$, is the length of the maximum shortest $(u,v)$-path in $T$.  The max degree of $T$ is denoted $\Delta(T)$.  %We use $\ell$ to denote the number of leaves of $T$.
+	Let $T$ be a tree of order $n$.  A crescent labelling of $T$ is a map $L: E(T) \mapsto \{1,2, \ldots, t\}$, such that the distance multiset of $L(T)$ is of the form $\{d_1^1,d_2^2, \ldots, d_{n-1}^{n-1}\}$.  The diameter of $T$, denoted $\diam(T)$, is the length of the $(u,v)$-path in $T$.  The max degree of $T$ is denoted $\Delta(T)$.  %We use $\ell$ to denote the number of leaves of $T$.
 	
-	\subsection{Path Perspective: Crescent Labellings and $r$-Bounding Paths}
-	
-	%When $t = 2$, crescent labellings are common in the following two cases: (1) when $\diam(T)$ is large with $\Delta(T)$ and $\ell$ small; and (2) when $\diam(T)$ is small with $\Delta(T)$ and $\ell$ large.  In this section, we show that for $n$ sufficiently large, crescent labellings do not work in the remaining cases.
-	
-	%First we need an important lemma.
-	
-	This section establishes a simple arithmetic condition on long paths in a crescent labelled tree.
-	
-	\begin{lem}[Arithmetic Condition]\label{Lemma-ArithmeticCondition}
-		Let $k \geq 2t$.  Let $\mathbf{w}$ be a $\{1,2,\ldots, t\}$-word with length $k$ containing at least two disjoint subwords of $t-1$ 1s.  Let $w_{a-t+2} = w_{a-t+3} = \cdots = w_{a} = 1 = w_b = w_{b+1} = \cdots = w_{b+t-2}$, where $a$ and $b$ are the smallest and largest satisfying $a<b$, respectively.  Then all distances $1,2, \ldots, \sum_{i = a}^{b-1}w_i$ occur with multiplicity at least $2$.
-	\end{lem}
-
-	\begin{proof}
-		Let $m = \sum_{i = a}^{b-1}w_i$ and observe that because $w_a = w_b = 1$, $m = \sum_{i = a+1}^{b}w_i$ as well.  It is sufficient to show that for any such $\mathbf{w}$, the following set inclusion holds: 
-		$$\{1,2,\ldots, m\} \subseteq \{d(w_{a+1-j},w_i): j \in [0,t-1], i \in [a-j+2,b-1]\}.$$
-		
-		This is because, if true, the same property will hold for the distances between the all $1$s subwords involving $w_{b}$, $w_{b+1}$, $\ldots$, $w_{b+t-2}$, which means that each such distance occurs at least twice.  We show this by induction on the length of the word $\mathbf{w}' = (w_{a-t+2},w_{a-t+3}, \ldots, w_{a}, w_{a+1}, \ldots, w_{a+r-1})$, which we denote by $r+t-1$.  The statement clearly holds for $r=0$.  If $r=1$, then $\mathbf{w}' = (1^{t-1},1)$ or $\mathbf{w}' = (1^{t-1},u)$ for some $u \in [2,t]$, where concatenation means repeated consecutive word elements.  In the former case, distances $1,2, \ldots, t$ clearly occur at least once, and in the latter, distances $1,2, \ldots, t-1+u$ each occur as well since for any $v \in [0,u-1]$, $t-1+u-v$ is the sum of all but the first $v$ elements of $\mathbf{w}'$.  Suppose the inductive hypothesis holds for some $r \geq 1$ and set $m' = \sum_{i=a-t+2}^{a+r-1}w_i$.  That is, we assume that the $\{1,2, \ldots, t\}$-word $\mathbf{w}' = (w_{a-t+2}, w_{a-t+3}, \ldots, w_a,w_{a+1}, \ldots, w_{a+r-1})$ attains the distances $1,2,\ldots, m'$.  Then the length $(r+1)+t-1$ word $\mathbf{w}'$ with a $1$ appended to the end clearly attains all distances $1,2,\ldots, m'+1$.  The other case is when $u$ is appended to the end of $\mathbf{w}'$ where $u \in [2,t]$.  In this case, the word attains the distance $\sum_{i=a-t+2+v}^{a+r}w_i = m'+v$ for each $v \in [2,u]$, which is what we wanted to show.
-		
-		Thus in particular, the distances $1,2, \ldots, m$ each occur at least once in 
-		$$\{d(w_{a+1-j},w_i): j \in [0,t-1], i \in [a-j+2,b-1]\}$$
-		%$$\{d(w_a,w_i):i \in [a+1,b-1]\} \cup \{d(w_{a+1},w_i): i \in [a+2,b-1]\}$$ 
-		as well as at least once in 
-		$$\{d(w_{b-1+j},w_i): j \in [0,t-1], i \in [a+1,b+j-2]\},$$
-		%$$\{d(w_b,w_i):i \in [a+1,b-1]\} \cup \{d(w_{b-1},w_i): i \in [a+1,b-2]\}.$$ 
-		as desired. \qedhere
-	\end{proof}
 
 \begin{lem}[Basic Diameter Lower Bound]
 	Let $t$ be a positive integer.  If $L(T)$ is a crescent labelling of the tree $T$ with weights $\{1,2,\ldots,t\}$, then $\diam(T) \geq \tfrac{n-1}{t}$.
@@ -115,118 +89,76 @@
 \begin{proof}
 	Since there are at least $n-1$ distinct distances, there is a distance $d$ with value at least $n-1$.  Let $u,v \in V(T)$ such that $d(u,v) = d$, then since $t$ is the max edge weight, this means that the number of edges on a $(u,v)$-path is at least $\tfrac{d}{t} \geq \tfrac{n-1}{t}$.
 \end{proof}
-
-\subsubsection{$t$-Bounded Paths}
-
-Let $L(T)$ be a labelling of $T$ with edge weights from $\{1,2,\ldots, t\}$.  If a path $P \subseteq T$ is labelled by $L$ in such a way that \textbf{(1)} all edge weights are in $\{1,2,\ldots, r\}$ for some $1 \leq r \leq t$, and \textbf{(2)} it is appended on each side by $r-1$ consecutive edges with weight $1$, then we call $P$ an \emph{$r$-bounded path} of $T$.  Define $b_L(T,r)$ to be the maximum weight sum over all edges of a $r$-bounded path of $T$ under $L$.
-
-\begin{prop}
-	Let $L(T)$ be a crescent labelling of $T$ with weights $\{1,2,\ldots,t\}$.  Suppose $L(T)$ contains a $r$-bounded path $P = (e_1,e_2,\ldots,e_k)$ of $T$.  Then every distance $1,2,\ldots, b_L(T,r)$ occurs with multiplicity at least $2$. %path $P = (p_1p_2,p_2p_3,\ldots,p_{k-1}p_k)$ such that both $w(p_1p_2) = w(p_2p_3) = \cdots = w(p_{t-1}p_t) = 1,$	and	$w(p_{k-t-2}p_{k-t-1}) = w(p_{k-t-1}p_{k-t}) = \cdots = w(p_{k-1}p_k) = 1,$ and set $m:= k-2(t-1)$.  Then every distance $1,2,\ldots, m$ occurs with multiplicity at least $2$.
-\end{prop}
-\begin{proof}
-	The statement follows immediately from Lemma \ref{Lemma-ArithmeticCondition}.
-\end{proof}
-
-\begin{prop}
-	Let $L(T)$ be a crescent labelling of $T$ with weights $\{1,2,\ldots,t\}$.  Then $b_L(T,r) \leq n-1$ for every $r \in \{1,2,\ldots,t\}$.
-\end{prop}
-
-\begin{proof}
-	Suppose $b_L(T,r) \geq n-1$.  Then by the proposition, every distance $1,2,\ldots,n-1$ has multiplicity at least $2$, which contradicts $L(T)$ inducing $n-1$ distinct distances such that exactly one is unique.
-\end{proof}
-
-\begin{cor}
-	Let $L(T)$ be a crescent labelling of $T$ with weights $\{1,2,\ldots,t\}$.  Define $a_i$ to be the number of weight $i$ edges on an $r$-bounding path of $T$ with length $k$ and maximum weight sum under $L$.  Then $\sum_{i=1}^r ia_i \leq n-1$ and $\sum_{i=1}^r a_i = k$.
-\end{cor}
-
-\begin{prop}
-	Let $L(T)$ be a crescent labelling of $T$ with weights $\{1,2,\ldots,t\}$.  If $P = (e_1$, $e_2$, $\ldots$, $e_k)$ is an $r$-bounding path of $T$ under $L$, then $k \leq n-1 - \sum_{i=2}^r (i-1)a_i$.
-\end{prop}
-
-The next proposition suggests that, when $t =2$, the larger the maximum distance becomes (over $n-1$), the more weight $2$ edges there should be on the tails of the path inducing maximum distance.
-
-\begin{prop}
-	Let $L(T)$ be a crescent labelling with weights $\{1,2,\ldots, t\}$.  For every path $ F= (v_1v_2,v_2v_3,\ldots,v_{t-1}v_t)$ satisfying $w(v_iv_{i+1}) =1$ for each $i \in [1,t-1]$, define $X$ and $Y$ to be the vertices of $T$ connected to $v_1$ and $v_t$, respectively, but not through those in $F$.  Then for every $x \in X$, $d(v_1,x) \leq n$ and for every $y \in Y$, $d(v_t,y) \leq n$.
-\end{prop}
-
-\begin{proof}
-	Let $P = (e_1,e_2,\ldots,e_k)$ be a path such that the longest distance in $L(T)$ is $\sum_{i=1}^k w(e_i)$.  Let $P' =  (e_a,e_{a+1}, \ldots, e_{b})$ be any smallest path satisfying $\sum_{i = a}^b w(e_i) \geq n$ for some $1 \leq a < b \leq k$.  If there is a $j \in \{1,2,\ldots, a-1\} \cup \{b+1,b+2,\ldots,k\}$ such that $w(e_j) = w(e_{j+1}) = \cdots = w(e_{j+t-1}) =1$, then every distance $1,2,\ldots,n$ occurs at least once (by similar reasoning to the proof of Lemma \ref{Lemma-ArithmeticCondition}, a contradiction.  So, if $t = 2$, then all edges connected to $P \setminus P'$ have to have weight $2$ since otherwise there would be a path beginning with a weight $1$ edge containing $P'$, which again means there would be more than $n-1$ distinct distances.  In general, there can be no path of $t-1$ consecutive weight $1$ edges in $P \setminus P'$. \qedhere
-\end{proof}
-
-\begin{prop}
-	Let $L(T)$ be a crescent labelling with both weights $\{1,2\}$.  Let $P$ be a path in $T$ where $P= (e_1,e_2,\ldots,e_k)$ such that the following two properties hold:
-	\begin{enumerate}
-		\item $\sum_{i=1}^{k} w(e_i) = d_{max}$.
-		
-		\item $P$ contains a subpath $P' = (e_a,e_{a+1},\ldots,e_{a+b-1})$ satisfying $\sum_{i=a}^{a+b-1} w(e_i) \in [n+1, n+2]$ where $a$ and $b$ are chosen so that the maximum number of weight $2$ edges are to the ``right" of $b$.
-		
-	\end{enumerate}
-	  Then $k \leq \tfrac{3n}{4}$.
-\end{prop}
-
-\begin{proof}
-	Note by proposition, no edge $e_h$ for any $h \in [1,a-1] \cup [a+b,k]$ satisfies $w(e_h) = 1$.  Suppose for a contradiction that $k> 3n/4$.  Then either $P'$ contains an edge with weight $1$ or it does not.  If $P'$ contains only weight $2$ edges, then since $k \geq 3n/4$ and there exists an edge with weight $1$, Suppose for some $j \in [a,a+b-1]$, $w(e_{j}) = 1$.    Thus the sums $\sum_{i=1}^j w(e_i) \leq n$ and $\sum_{i=j}^{k} w(e_i) \leq n$ both hold.  But since $\sum_{i=a}^{a+b-1} w(e_i) \in [n+1, n+t]$, we have that, say, $n+1 = a_1 + 2a_2$, where $a_1$ and $a_2$ are the number of $1$s and $2$s in $P'$.  Since $b-a > n/2$ and $k > 3n/4$, either $w(e_1) = \cdots = w(e_{n/4}) =2 $ or $w(e_k) = w(e_{k-1}) = \cdots = w(e_{k-1-n/4}) = 2$.  Since $w(e_j) = 1$ and $j \in [a,a+b-1]$, each of these tail edges with weight $2$ correspond to at least $2$ distinct distances each, implying that there are at least $n/2$ distinct distances from these tails.  Then for each $h \in [1,j]$ there is a distinct distance as well.  That is, if $j = n/C$, and if $J_1$ and $J_2$ are the number of weights $1$ and $2$ edges with index larger than $j$, respectively, then there are $2J_2 + J_1$ distinct distances to the right of $j$ and $n/C$ to the left.  Thus we require $n-1 \geq 2J_2 + J_1 + n/C$.  If there are $n/4$ twos and $n/4$ ones and $C > n/4$, then we get a contradiction.  Note that we require $J_2 + J_1 + n/C = k$ and we know for sure that $J_2 > n/4$.
-\end{proof}
-
-\begin{lem}
-	Let $L(T)$ be a crescent labelling of $T$ using weights $\{1,2,\ldots,t\}$.  Then for every $r \in \{2,3,\ldots,t\}$, $L(T)$ cannot contain a subpath $P = (e_1,e_2,\ldots,e_{(n-1)/r})$ such that $w(e_i) \in \{1,2,\ldots,r\}$ where $i \in \{1,2,\ldots,(n-1)/r\}$ and $P$ is preceded by a path of $r-1$ weight $1$ edges.
-\end{lem}
-
-%\begin{lem}
-%	Let $P = (e_1,e_2,\ldots,e_k)$ be a path in $L(T)$.  Define $a(i,x) := |\{e_j: w(e_j) = i, j \leq x\}|$.  If $k > \tfrac{n-1}{2} + 2\sqrt{n}$ and $a(1,\tfrac{n-1}{2}) \geq \sqrt{n}$, then the distances $1,2,\ldots, \sqrt{n}$ each occur with multiplicity at least $\sqrt{n}$.
-%\end{lem}
-
-	\iffalse
-	\begin{lem}
-		Let $k$ be a positive integer satisfying $k \geq 5$.  If an edge-weighted path $P$ with length $k$ has at least three edges with weight $1$, then all distances $1,2,\ldots, k-2$ occur with multiplicity at least $2$.
-	\end{lem}
-
-\begin{proof}
-	Let $\mathbf{w}$ be a $\{1,2\}$ word with length $k$.  By assumption we know that at least three of the elements of $\mathbf{w}$ are $1$s.  Suppose $\mathbf{w}_a = \mathbf{w}_b = \mathbf{w}_c = 1$ where $1 \leq a < b < c \leq k$.  First observe that since $k \geq 5$ and there are at least three $1$s, distances $1$, $2$, $3$, and $4$ each occur at least twice as a distance.  To show that the remaining distances up to $k-2$ each occur at least twice, we argue by induction in regards to the partial sums with the elements from near $\mathbf{w}_a$ and those to the right.  Suppose without loss of generality that $a < k/2$; note that if for all $i < k/2$, $\mathbf{w}_i = 2$, ten just flip $\mathbf{w}$ so that $\mathbf{w}_i = \mathbf{w}_j$ for all $1 \leq j \leq k$.  
-	
-	Note that $2122$ contains two $5$s.  $21221$, $21222$, $212221$, $212222$, $2122211$, $2122212$, $21222121$, $21222122$
 	
 	
-	Suppose the partial sums in the subword $\mathbf{w}^{(m)} = (\mathbf{w}_a, \mathbf{w}_{a+1}, \ldots, \mathbf{w}_{a+m-1})$ of the form
-	$$\sum_{i = a}^{}$$
-	%contains all distances $1,2, \ldots, m-1$.  If $\mathbf{w}_{a+m} = 2$, then $\sum_{\mathbf{w}_a, \mathbf{w}_{a+1}, \ldots, \mathbf{w}_{a+m-1})$
-\end{proof}
-\fi
-
-\iffalse
-	We suppose going forward that the diameter path $D$ of $T$ is labelled in a way so that there are at least three edges with weight $1$.
+	For a pair of vertices $u,v \in V(T)$, we denote the $(u,v)$-path in $T$ as $P(u,v)$.  Lemma \ref{Lemma-DegreeClasses} below generalizes the observation underlying the maximum degree upper bound of $\sim$ $\sqrt{2n}$.
 	
-	\begin{lem}
-		If $\ell > \diam(T)/2 + 1$, then the maximum distance occurs uniquely in $T$ on the diameter path of $L(T)$.
-	\end{lem}
-	
-	Our argument is in four parts:
-	
-	\begin{lem}[high $\Delta(T)$]
-		If $\Delta(T) \geq \frac{t(\sqrt{8n+1}+1)}{2}$, then no crescent labelling exists.
-	\end{lem}
-	
-	\begin{proof}
-		We suppose that $\Delta(T) \geq \frac{t(\sqrt{8n+1}+1)}{2}$.  Then by PHP, the distances $1+1$ or $2+2$ occurs at least ${\frac{(\sqrt{8n+1}+1)}{2} \choose 2}$ times, and if this number is at least $n$, which it is, then no crescent labelling exists because then some distance occurs with multiplicity greater than $n-1$, a contradiction. \qedhere
-	\end{proof}
-	
-	
-	\paragraph{\textbf{A:}	High $\mathbf{\diam(T)}$, high $\mathbf{\ell}$}
-	
-	Observe that since the maximum distance occurs on the diameter path of $T$, and this distance must be at least $n-1$, it holds that $\diam(T) \geq (n-1)/2 + 3$ (in extreme case where all but three edges on the path are $2$s).
-	
-	\begin{lem}
-		If $\ell > \diam(T)/2 + 1$ and $\Delta(T) < \frac{t(\sqrt{8n+1}+1)}{2}$, then 
+	\begin{lem}\label{Lemma-DegreeClasses}
+		Let $T$ be a tree of order $n$.  For every $i \in [1,n-1]$, $M \in V(T)$, and $j \in \mathcal{N}(M)$, define
+		$$D_j := \{u \in V(T) \setminus \{M\}: d(u,M) = d_i, j \in P(u,M)\}.$$
+		Then distance $2d_i$ occurs with multiplicity at least $\sum_{j < k}^{\deg(M)} |D_j|\cdot |D_k|$.
 	\end{lem}
 
 	\begin{proof}
-		There are too many two edge and three edge paths producing distances 3 and 4.  Because the diameter is so big and the number of leaves is so high, there need to be a lot of vertices with moderately high degree -- around $\sqrt{n}$.  In particular, there are at least $n/4$ leaves and 
+		Let $M \in V(T)$ and $i \in [1,n-1]$.  Since $T$ is a tree, there is always a unique $(u,v)$-path for all $u,v \in V(T)$.  So, for each $u \in D_j$ and $v \in D_k$, the $(u,v)$-path must go through $M$, which means $d(u,v) = d(u,M) + d(M,v) = 2d_i$.  There are $|D_j| \cdot |D_k|$ such $u$ and $v$ pairs, so indeed $2d_i$ has multiplicity at least $\sum_{j < k}^{\deg(M)} |D_j|\cdot |D_k|$. \qedhere
 	\end{proof}
 	
-	\paragraph{\textbf{B:}	low $\mathbf{\diam(T)}$, low $\mathbf{\ell}$}
-
+	Now we apply the lemma to get a condition on crescent labelled trees.
 	
-	\paragraph{\textbf{D:}	low $\mathbf{\diam(T)}$, low $\mathbf{\Delta(T)}$}
-\fi
+	\begin{prop}[Max Multiplicity Condition]
+		Let $L(T)$ be a crescent labelling of a tree $T$.  Then for every $i \in [1,n-1]$, $M \in V(T)$, and $j \in \mathcal{N}(M)$, 
+		$$\sum_{j < k}^{\deg(M)} |D_j|\cdot |D_k| < n.$$
+	\end{prop}
+	
+	\begin{proof}
+		Since $L(T)$ is a crescent labelling of $T$, no distance can have multiplicity greater than $n-1$and $T$ is a tree.  Since $T$ is a tree, it follows by Lemma \ref{Lemma-DegreeClasses} that for each vertex $M \in V(T)$, $i \in [1,n-1]$, $\sum_{j < k}^{\deg(M)} |D_j|\cdot |D_k| < n$. \qedhere
+	\end{proof}
+	
+	Next is a general lemma on $\{1,2,\ldots,t\}$-words containing subwords with $t-1$ consecutive $1s$.
+	
+	\begin{lem}[Arithmetic Condition]\label{Lemma-ArithmeticCondition}
+		Let $k \geq 2t$.  Let $\mathbf{w}$ be a $\{1,2,\ldots, t\}$-word with length $k$.  If $w_{a-t+2} = w_{a-t+3} = \cdots = w_{a} = 1$ for some $a \in \{1,2, \ldots, k\}$, then each value 
+		$$1,2, \ldots, \max\biggr\{\sum_{i = 1}^{a}w_i, \sum_{i=a-t+2}^{k}w_i\biggr\}$$ 
+		occurs as a partial sum in $\mathbf{w}$.
+	\end{lem}
+	
+	\begin{proof}
+		Suppose without loss of generality that $\sum_{i = 1}^{a}w_i \leq \sum_{i=a-t+2}^{k}w_i$.  Then it is sufficient to show that every value $1,2,\ldots, \sum_{i=a-t+2}^{k}w_i$ occurs as a partial sum in $\mathbf{w}$.  Call $w_{a-t+2},w_{a-t+3}, \ldots, w_a$ the \emph{unit segment} of $\mathbf{w}$ and $w_{a+1},w_{a+2},\ldots,w_k$ the \emph{non-unit segment} of $\mathbf{w}$.  We proceed by induction on the number of terms $r$ in the non-unit segment of $\mathbf{w}$.  When $r = 1$, $w_{a+r} \in \{1,\ldots,t\}$, and since the unit segment has $t-1$ 1s, for each $j \in \{1,2,\ldots,t-1\}$, we have the partial sums $j = \sum_{i=0}^{j-1}w_{a-i}$.  Then the values between $w_{a+r}$ and $\sum_{i=a-t+2}^{a+r}w_i$ are of the form $w_{a+r}+ \sum_{i=0}^{j-1}w_{a-i}$.  For the inductive step, the values $1,2,\ldots,\sum_{i=a-t+2}^{a+r-1}w_i$ occur at least once by inductive hypothesis.  We have that $w_{a+r} \in \{1,2,\ldots,t\}$ and the values between $\sum_{i=a+1}^{a+r-1}w_i$ and $\sum_{i=a+1}^{a+r}w_i$ can be obtained from $\sum_{i=a+1-j}^{a+r-1}w_i$ for each $j \in \{1,2,\ldots,t-1\}$.  Then similarly the values between $\sum_{i=a+1}^{a+r}w_i$ and $\sum_{i=a-t+2}^{a+r}w_i$ are $\sum_{i=a+1-j}^{a+r}w_i$ for $j \in \{1,2,\ldots,t-1\}$. \qedhere
+	\end{proof}
+	
+	We now apply this arithmetic lemma to crescent labelled trees to show that when there are many consecutive 1s on a path, the path cannot be too long with many large weight edges.
+	
+	\begin{prop}
+		Let $L(T)$ be a crescent labelling of a tree $T$ with edge weights in $\{1,2,\ldots,t\}$.  Then for every path $P = (v_1v_2,v_2v_3,\ldots,v_{t-1}v_t)$ in $T$ such that $w(v_iv_{i+1}) = 1$ for $i \in \{1,2,\ldots,t-1\}$, it follows that $\max\{d(v_1,u): u \in V(T)\} < n$ and $\max\{d(v_t,u): u \in V(T)\} < n$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $T$ be a tree with a path $P$ specified in the proposition statement and $L(T)$ a crescent labelling.  It is sufficient to show that $\max\{d(v_1,u): u \in V(T)\} < n$ since the case for $v_t$ is similar.  Let $u' \in V(T)$ such that $d(v_1,u') = \max\{d(v_1,u): u \in V(T)\}$.  By Lemma \ref{Lemma-ArithmeticCondition}, every distance $1,2,\ldots, d(v_1,u')$ occurs at least once.  Since $L(T)$ is a crescent labelling, there can be at most $n-1$ distinct distances, so $d(v_1,u') < n$ as desired. \qedhere
+	\end{proof}
+	The implication for when $t=2$ is quite strong since this imposes a max distance condition on vertices incident to edges with weight $1$.
+	\begin{cor}
+		Let $L(T)$ be a crescent labelling of a tree $T$.  If $t = 2$, then every vertex incident to an edge with weight $1$ has max distance at most $n-1$.
+	\end{cor}
+	
+	%\begin{prop}
+	%	Let $L(T)$ be a crescent labelling of a tree $T$.  For every path $P$ of length $t-1$ whose edges all have weight $1$, each end vertex $v \in P$ satisfies 
+	%	$$\max\{d(v,u):u \in V(T)\} \leq n.$$
+	%\end{prop}
+	
+	What follows is a basic lemma about trees that may turn out to be useful in case parameterizing by number of leaves becomes sensible.
+	
+	\begin{lem}[From Chartrand and Lesniak's text ``Graphs and Digraphs" 4th edition]
+		Let $T$ be a tree with $n_i$ vertices with degree $i$, where $i \in \{1,2,\ldots,\Delta(T)\}$.  Then $n_1 = n_3 + 2n_4 + 3n_5 + \cdots + (\Delta(T)-2)n_{\Delta(T)} + 2$.
+	\end{lem}
+	
+	\begin{proof}
+		Note that $n = \sum_{i=1}^{\Delta(T)}n_i$.  Since $T$ is a tree, 
+		$$\sum_{i=1}^{\Delta(T)} in_i  = \sum_{v \in V(T)} \deg(v) = 2(n-1) = 2\biggr(\sum_{i=1}^{\Delta(T)}n_i \biggr) - 2.$$  
+		Rearranging gives $2+ \sum_{i=1}^{\Delta(T)} (i-2)n_i = 0.$
+	\end{proof}
+	
+	\begin{cor}
+		If $T$ is a tree, then $\sum_{i=3}^{\Delta(T)}(i-2)n_i < n_1$
+	\end{cor}
 	
 \end{document}
